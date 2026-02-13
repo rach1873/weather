@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import { getBackground, floor, build } from "./Weather-Helper-Function/Helper";
+import { getBackground, floor } from "./Weather-Helper-Function/Helper";
 import "./App.css";
 import Form from "./components/Form";
 import CurrentForecast from "./components/CurrentForecast";
@@ -33,16 +33,8 @@ function App() {
 
   const flip = click === 0 || problem ? "hidden" : "block";
 
-  const {
-    feelsLike,
-    humidity,
-    temp,
-    description,
-    icon,
-    main,
-    windspeed,
-    city,
-  } = weatherdata;
+  const { feelsLike, humidity, temp, description, icon, windspeed, city } =
+    weatherdata;
 
   const getData = async (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -51,7 +43,7 @@ function App() {
         `https://api.openweathermap.org/data/2.5/weather?q=${val}&appid=${apikey}&units=imperial`,
       );
 
-      const { feels_like, humidity, pressure, temp } = res.data.main;
+      const { feels_like, humidity, temp } = res.data.main;
       const { description, icon, main } = res.data.weather[0];
       const { speed } = res.data.wind;
       const city = res.data.name;
